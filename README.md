@@ -83,6 +83,7 @@ Bash
 kubectl get pods        # Identify active web server instances
 kubectl delete pod <id> # Simulate a server crash by deleting a pod
 kubectl get pods -w     # Watch Kubernetes instantly respawn a replacement
+
 ## 🚀 7. CI/CD & Automation (GitHub Actions)
 **Objective:** Automate the build, test, and deployment pipeline to ensure fast and reliable software delivery.
 
