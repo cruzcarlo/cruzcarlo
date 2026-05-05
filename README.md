@@ -94,3 +94,34 @@ Key Concepts Applied:
 Workflows: Defining the automated steps for the server to follow.
 
 Secrets Management: Safely storing API keys and credentials so they aren't exposed in the code.
+
+# 🚀 8. Local Cloud & Observability Stack
+
+## 📖 Overview
+This project is a localized simulation of a modern DevOps and Site Reliability Engineering (SRE) environment. It demonstrates the ability to provision infrastructure as code, deploy self-healing applications, and monitor system metrics in real-time.
+
+## 🛠️ Tech Stack
+*   **Container Orchestration:** Kubernetes (Minikube)
+*   **Infrastructure as Code (IaC):** Terraform (HCL)
+*   **Containerization:** Docker & Docker Compose
+*   **Observability & Monitoring:** Prometheus & Grafana
+*   **Environment:** WSL (Ubuntu) on Windows
+
+## 🏗️ Project Architecture
+1.  **Kubernetes Deployment:** Deployed a highly available Nginx web server demonstrating pod lifecycle management and self-healing capabilities.
+2.  **Terraform Provisioning:** Authored HCL scripts to define and plan AWS EC2 instances (simulated deployment in `ap-southeast-1`).
+3.  **Observability Pipeline:** 
+    *   Configured **Prometheus** to scrape system and application metrics at 15-second intervals.
+    *   Connected **Grafana** to Prometheus to visualize time-series data, specifically tracking `prometheus_http_requests_total` to monitor live traffic spikes.
+
+## 🐛 Challenges & Troubleshooting
+During this build, I encountered and resolved several real-world infrastructure issues:
+*   **Architecture Mismatch:** Resolved an `exec format error` by identifying processor architecture (ARM vs x86) and downloading the strictly compatible binaries for Minikube.
+*   **Network Unreachable Errors:** Overcame WSL to Ubuntu archive connection failures by forcing IPv4 package resolution (`-o Acquire::ForceIPv4=true`) during the Docker Compose installation.
+
+## 🚀 How to Run the Monitoring Stack
+To spin up the Prometheus and Grafana instances locally:
+1. Navigate to the monitoring directory: `cd ~/cloud-labs/monitoring`
+2. Start the containers in detached mode: `docker-compose up -d`
+3. Access Grafana at `http://localhost:3000` (Default credentials: admin/admin)
+4. To shut down and clean up resources: `docker-compose down`
