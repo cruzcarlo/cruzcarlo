@@ -125,3 +125,40 @@ To spin up the Prometheus and Grafana instances locally:
 2. Start the containers in detached mode: `docker-compose up -d`
 3. Access Grafana at `http://localhost:3000` (Default credentials: admin/admin)
 4. To shut down and clean up resources: `docker-compose down`
+
+# 🌐 8. Deep Linux Networking & Container Internals (Advanced)
+**Objective:** Moving beyond the "magic" of Docker to understand and manually engineer the underlying Linux network primitives that power modern Cloud and SRE environments. 
+
+As a 3rd-year IT student, I wanted to prove that I don't just know how to run containers, but I know how they actually work at the kernel level.
+
+**Core Achievements:**
+*   **Manual Container Networking:** Engineered logical network boundaries from scratch. I created isolated Linux **Network Namespaces (`ip netns`)** and linked them using virtual ethernet (`veth`) cables to simulate exactly how Docker isolates application traffic.
+*   **Kernel-Level Traffic Control:** Configured packet filtering using **iptables** to act as a "Cloud Bouncer," enforcing strict ingress/egress security policies (e.g., blocking malicious IPs and opening Port 80 for web traffic).
+*   **Deep Packet Inspection (DPI):** Captured raw network streams utilizing **tcpdump** on Port 443, exporting `.pcap` files for advanced forensic analysis.
+*   **Advanced Diagnostics:** Upgraded my troubleshooting toolkit by replacing legacy tools with modern equivalents: `ss` (Socket Statistics), `nc` (Netcat for port probing), and `dig` (DNS resolution).
+
+#### 🐛 Debugging & Troubleshooting Log
+Real engineering is about fixing things when they break. Here are the specific issues I encountered and resolved during this module:
+
+1.  **The "Command Not Found" / Package Resolution Error**
+    *   *Symptom:* When attempting to run `tcpdump`, the system returned a "command not found" error. Standard `apt-get install` commands failed due to a broken IPv6 network bridge in WSL.
+    *   *The Fix:* I bypassed the broken routing by forcing the package manager to strictly resolve via IPv4 using the command: `sudo apt-get install tcpdump -y -o Acquire::ForceIPv4=true`.
+2.  **The "Hung" Packet Capture**
+    *   *Symptom:* Running `tcpdump -i any port 443 -c 50` resulted in a terminal that appeared completely frozen because it was waiting for 50 specific packets to pass through a quiet interface.
+    *   *The Fix:* Instead of just waiting, I diagnosed the traffic flow. I realized Port 443 requires active HTTPS requests. I manually generated secure web traffic via a browser to force the packets through the interface, instantly satisfying the `-c 50` parameter and successfully writing the `.pcap` file.
+
+#### 💻 Execution Proof (Simulating Docker's Core Engine)
+```bash
+# Creating isolated namespaces (simulating two containers)
+sudo ip netns add red
+sudo ip netns add blue
+
+# Creating the virtual cable and plugging them in
+sudo ip link add veth-red type veth peer name veth-blue
+sudo ip link set veth-red netns red
+sudo ip link set veth-blue netns blue
+
+# Activating the network and proving isolation via Ping
+sudo ip netns exec red ip addr add 10.0.0.1/24 dev veth-red
+sudo ip netns exec red ip link set veth-red up
+# Result: Successful manual namespace communication.
