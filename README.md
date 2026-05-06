@@ -6,7 +6,7 @@ Based in Cebu, Philippines, I am a technology student actively transitioning int
 This portfolio documents my hands-on engineering labs, showcasing my progression from foundational Linux administration to cloud provisioning, scripting, and network automation. 
 
 ---
-
+ Linux- [https://github.com/cruzcarlo/Linux-] 
 ## 🐧 1. Linux Systems Administration
 **Objective:** Master the command-line interface and internal server environments.
 
@@ -19,6 +19,7 @@ chmod 755 file   # Enforce secure read/write/execute permissions
 ps aux           # Audit all running system processes
 top              # Monitor real-time CPU and memory allocation
 
+   AWS-BASICS    [https://github.com/cruzcarlo/AWS-BASICS]
 ## ☁️ 2. AWS Cloud Provisioning & Web Hosting
 **Objective:** Deploy and manage remote infrastructure.
 
@@ -33,6 +34,7 @@ ssh -i ~/Downloads/mylab-key.pem ec2-user@<public-ip>
 # Updating packages and installing the Nginx web server
 sudo dnf install nginx -y
 
+Scripting Using Cron    [https://github.com/cruzcarlo/Scripting-]
 ## ⏰ 3. Automation & Disaster Recovery (Cron)
 **Objective:** Eliminate manual intervention for critical system tasks.
 
@@ -49,6 +51,7 @@ tar -czf /home/ec2-user/backup-$(date +%F).tar.gz /var/www/html
 # The Crontab entry: Schedules the backup to run automatically at 2:00 AM daily
 0 2 * * * /home/ec2-user/backup.sh
 
+-The-Sentinel-System-Network-Auditor-     [https://github.com/cruzcarlo/-The-Sentinel-System-Network-Auditor-]
 ## 🛡️ 4. The Sentinel System: Network Auditor
 **Objective:**  Monitor system security and analyze network traffic.
 
@@ -61,6 +64,7 @@ netstat -tulnp   # List all active listening ports and their PIDs
 ss -ltn          # Quickly audit TCP socket connections
 tcpdump -i eth0  # Capture and analyze live network packets on the main interface
 
+Terraform    [https://github.com/cruzcarlo/Terraform]
 ## 🏗️ 5. Infrastructure as Code (Terraform)
 **Objective:** Replace manual "click-ops" with version-controlled code to prevent configuration drift.
 
@@ -72,6 +76,8 @@ Bash
 terraform init          # Initialize the directory and local provider
 terraform plan          # Preview the "Infrastructure Receipt" before building
 terraform apply         # Execute the code to provision the resource
+
+Kurbenetes    [https://github.com/cruzcarlo/Kurbenetes]
 ## 🚢 6. Container Orchestration (Kubernetes)
 **Objective:** Build high-availability systems that automatically recover from server failures.
 
@@ -84,6 +90,7 @@ kubectl get pods        # Identify active web server instances
 kubectl delete pod <id> # Simulate a server crash by deleting a pod
 kubectl get pods -w     # Watch Kubernetes instantly respawn a replacement
 
+ CI-CD    [https://github.com/cruzcarlo/CI-CD]
 ## 🚀 7. CI/CD & Automation (GitHub Actions)
 **Objective:** Automate the build, test, and deployment pipeline to ensure fast and reliable software delivery.
 
@@ -95,8 +102,8 @@ Workflows: Defining the automated steps for the server to follow.
 
 Secrets Management: Safely storing API keys and credentials so they aren't exposed in the code.
 
+Monitoring-and-Observability    [https://github.com/cruzcarlo/Monitoring-and-Observability]
 # 🚀 8. Local Cloud & Observability Stack
-
 ## 📖 Overview
 This project is a localized simulation of a modern DevOps and Site Reliability Engineering (SRE) environment. It demonstrates the ability to provision infrastructure as code, deploy self-healing applications, and monitor system metrics in real-time.
 
@@ -126,6 +133,7 @@ To spin up the Prometheus and Grafana instances locally:
 3. Access Grafana at `http://localhost:3000` (Default credentials: admin/admin)
 4. To shut down and clean up resources: `docker-compose down`
 
+Linux-Deep    [https://github.com/cruzcarlo/Linux-Deep]
 # 🌐 8. Deep Linux Networking & Container Internals (Advanced)
 **Objective:** Moving beyond the "magic" of Docker to understand and manually engineer the underlying Linux network primitives that power modern Cloud and SRE environments. 
 
@@ -163,6 +171,7 @@ sudo ip netns exec red ip addr add 10.0.0.1/24 dev veth-red
 sudo ip netns exec red ip link set veth-red up
 # Result: Successful manual namespace communication.
 
+Ansible [https://github.com/cruzcarlo/Ansible]
 # 🚀 9 Automated Configuration Management with Ansible
 Lab Author: Carlo | 3rd Year BSIT Student
 Executive Summary
