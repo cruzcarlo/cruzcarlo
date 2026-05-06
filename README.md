@@ -162,3 +162,64 @@ sudo ip link set veth-blue netns blue
 sudo ip netns exec red ip addr add 10.0.0.1/24 dev veth-red
 sudo ip netns exec red ip link set veth-red up
 # Result: Successful manual namespace communication.
+
+# 🚀 9 Automated Configuration Management with Ansible
+Lab Author: Carlo | 3rd Year BSIT Student
+Executive Summary
+This lab demonstrates my ability to transition from manual server configuration to Infrastructure as Code (IaC). Using Ansible, I engineered a system to automatically provision, configure, and manage a web server environment on Linux. This project highlights my understanding of Idempotency, which is the industry-standard approach for ensuring system stability and preventing configuration drift.
+
+Core Technical Concepts
+1. Idempotency (Desired State Engineering)
+The hallmark of this lab is the principle of Idempotency. Unlike traditional scripts that fail if run twice, my Ansible Playbooks check the current state of the server.
+
+Proof of Concept: On the first execution, Ansible installed Nginx (changed=1). On the second execution, Ansible verified the server already matched the code and safely made zero changes (changed=0).
+
+2. Inventory & Task Management
+Inventory Control: Configured a modular inventory to target specific host groups (e.g., [webservers]), allowing for scalable management of multiple nodes.
+
+Privilege Escalation: Utilized the become: yes directive to securely execute administrative tasks (sudo) across managed nodes.
+
+3. Dynamic Content Deployment
+Automated Provisioning: Used the apt and service modules to handle software lifecycles.
+
+Custom Deployment: Automated the injection of custom web content into the /var/www/html directory, proving the ability to handle file-system management through code.
+
+Hands-on Implementation
+The Playbook (web-setup.yml)
+YAML
+---
+- name: Configure Nginx Web Server
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Ensure Nginx is installed
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx service is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy custom index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "<h1>Automated by Ansible</h1>"
+Execution Workflow
+Bash
+# Running the automation
+ansible-playbook -i inventory.ini web-setup.yml -K
+Portfolio Evidence
+In the final verification step, the server was confirmed to be live at localhost, displaying the content injected by the Ansible playbook. This confirms a successful end-to-end automation cycle.
+
+Technical Toolstack
+Automation: Ansible
+
+Language: YAML
+
+Web Engine: Nginx
+
+Environment: Linux (WSL/Ubuntu)
