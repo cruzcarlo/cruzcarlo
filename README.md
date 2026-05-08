@@ -232,3 +232,82 @@ Language: YAML
 Web Engine: Nginx
 
 Environment: Linux (WSL/Ubuntu)
+
+
+You are more than good—you've officially built a DevSecOps Defense-in-Depth pipeline. Seeing that Lynis output in your latest screenshot means your system has been audited against global security standards.
+
+Since you're building a job-ready portfolio, this README is designed to show a recruiter that you don't just "run commands," but you actually understand the why behind security architecture.
+
+📸 What you should screenshot for your Portfolio:
+The "Vulnerability Report": The output of npm audit showing those high/critical vulnerabilities.
+
+The "Ghost User" Verification: Run grep secure_app_user /etc/passwd to show you created a non-login system account.
+
+The Secret Retrieval: The moment your terminal prints the "SuperSecret..." password from the Vault.
+
+The Hardening Audit: That final Lynis screen showing the green [V] status for security audits.
+
+Securtity Depth  [https://github.com/cruzcarlo/Security-Depth]
+🛡️ Unified Cloud Security & System Hardening Lab
+Author: BSIT Student | Cloud & DevOps Engineering Lab
+
+Location: Lapu-Lapu City, Cebu
+
+Project Objective: Implement a 5-layer security pipeline to protect a Node.js application environment using the Defense-in-Depth strategy.
+
+🚀 Lab Overview
+This lab simulates a professional DevSecOps environment where security is "shifted left" (checked early) and the infrastructure is hardened against unauthorized access.
+
+🛠️ Technology Stack
+SAST: npm audit (Dependency scanning)
+
+IAM: Linux User Management (Least Privilege)
+
+Encryption: OpenSSL (Self-signed TLS/SSL)
+
+Secrets Management: HashiCorp Vault
+
+Compliance: Lynis (CIS Benchmark auditing)
+
+📑 Implementation Phases
+Phase 1: Static Application Security Testing (SAST)
+I initialized a Node.js environment and purposefully introduced a vulnerable version of Express (4.16.0).
+
+Action: Ran npm audit.
+
+Result: Detected multiple high-severity vulnerabilities (ReDoS, Open Redirect). This proves why we scan code before it ever reaches production.
+
+Phase 2: IAM & The Principle of Least Privilege
+Created a "Ghost User" (secure_app_user) with no login shell access.
+
+Hardening: Applied chmod 700 to the workspace.
+
+Outcome: Successfully blocked unauthorized users (including my own admin account) from writing to the directory without elevated privileges, effectively containing a potential breach.
+
+Phase 3: Cryptographic Identity (SSL/TLS)
+Generated a 4096-bit RSA key pair and a self-signed certificate.
+
+Configuration: Targeted localhost with localized metadata for Cebu/Lapu-Lapu City.
+
+Files: app_key.pem (Private) and app_cert.pem (Public).
+
+Phase 4: Secrets Management with HashiCorp Vault
+Configured a Vault server to move away from "hardcoded" secrets.
+
+Process: Initialized a dev-mode Vault, exported environment tokens, and injected a sensitive database password into a secure KV (Key-Value) store.
+
+Security Win: The application now requests secrets at runtime rather than storing them in plain-text .env files.
+
+Phase 5: CIS Benchmark & System Hardening
+Conducted a full-system security audit using Lynis.
+
+Focus: Checked for bootloader security, kernel hardening, and hidden files.
+
+Discovery: Identified key areas for OS hardening to align with Center for Internet Security (CIS) standards.
+
+🧠 Key Takeaways
+Security is not a checkbox: It’s a multi-layered pipeline.
+
+Identity is the Perimeter: By using restricted service accounts, we limit the "blast radius" of an attack.
+
+Automated Auditing: Tools like Lynis and npm audit are essential for maintaining a continuous security posture.
